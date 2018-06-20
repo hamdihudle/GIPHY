@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  
+</head>
+<body>
+
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 mx-auto">Welcome</h1>
+    <p class="lead mx-auto"></p>
+  </div>
+</div>
+
+ 
+
+<script src="https://code.jquery.com/jquery.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="javascript/javascript.js"></script>
+
+
+
+<body>
+  <div id="buttons">
+    <button animals="Dogs">
+      Dog
+    </button>
+    <button animals="Cats">
+      cats
+    </button>
+  
+
+
+    <button animals="Rats">
+        Rats
+      </button>
+   
+      <button animals="Wolves">
+          Wolves
+        </button>
+
+        <button data-person="Rabbits">
+         rabbits
+          </button>
+
+
+  </div>
+
+  <div id="gifs-appear-here">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $("button").on("click", function() {
+      var animals = $(this).attr("data-person");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        person + "&api_key=cNRB4uryFo5D1jOYDypw4Y1MZx4WDcCn";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        .then(function(response) {
+          var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div class='item'>");
+
+            var rating = results[i].rating;
+
+            var p = $("<p>").text("Rating: " + rating);
+
+            var animalsimg = $("<img>");
+            animalsimg.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(animalsimg);
+
+            $("#gifs-appear-here").prepend(gifDiv);
+          }
+        });
+    });
+  </script>
+</body>
+
+</html>
